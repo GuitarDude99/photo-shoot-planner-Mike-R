@@ -12,7 +12,7 @@ function Moodboard() {
   const fileInputRef = useRef(null); //  Ref for hidden file input
 
   const handleAddClick = () => {
-    fileInputRef.current.click(); // Trigger file picker 
+    fileInputRef.current.click(); // Trigger the file picker 
   };
 
   const handleImageChange = (event) => {

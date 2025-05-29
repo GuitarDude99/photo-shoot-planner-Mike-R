@@ -98,3 +98,72 @@ button:hover {
 
   background-color: #d0ebff;
 }
+
+
+
+/* Mobile Friendly??*/
+
+/* Reset*/
+body {
+
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #0a1e3f;
+  color: white;
+
+}
+
+section {
+  padding: 1.5rem;
+}
+
+/* Forms */
+form {
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+
+}
+
+form input,
+form textarea,
+button {
+
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Image Preview */
+img {
+
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+
+}
+
+/* Links */
+a {
+
+  color: #00e6e6;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 1rem;
+
+}
+
+a:hover {
+  
+  text-decoration: underline;
+}
