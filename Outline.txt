@@ -1,0 +1,38 @@
+PHOTOSHOOT PLANNER - OUTLINE
+
+Main Features
+
+1. Home/Greeting page
+
+This will encompass the "About" section, giving users an overview of what they can do on the site.
+It may prompt them to creat an account to continue.
+There will be 3 clickable links, 1 to each other main site feature/page
+So Shoot Planner, Moodboard/Inspiration, and Resources will be clickable links, 
+leading to thier own seperate pages within the site.
+
+A. Shoot Planner
+
+This will be the cornerstone of the site. It will be a fillable form that accepts user intake.
+There will be input lines for catagories like Photographer name, Assistant Name, Model or Models, Hair and Makeup artist, styist, 
+creative director, designer/ brand, date, shoot time and location, genre, shoot theme/description and client.
+
+B. Mood Board
+
+This will be a section that is mostly empty, but fillable, for the user to fill with refernce and inspiration imagery, 
+or links to such images and collections, that help visually guide the shoot.
+
+C. Resources
+
+This page will be a collection of links and information that the user can use for help in planning, or executing a shoot.
+Links will include resources like youtube videos on planning and executing a pro shoot, from notable photographers like Lara Jade and Lindsey Adler.
+Other resources will include links to websites that photographer can use to find other photographers, models, hair and makeup artist, etc 
+to possibly collaborate with.
+
+D. Undecided
+
+There may, or may not, be another section or feature as the project evolves, 
+based on project needs and how things take shape.
+
+
+
+
