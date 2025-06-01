@@ -36,7 +36,7 @@ function SignUp() {
 
     }
 
-    // Check that password is strong enough
+    // Check that password is strong enough.
 
     if (password.length < 6 || !containsNumber(password)) {
       setMessage('Password must be at least 6 characters and include a number.');
