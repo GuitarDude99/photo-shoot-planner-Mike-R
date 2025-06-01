@@ -1,76 +1,97 @@
 //Signup.jsx
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import Button from './Button';
 
-function Signup() {
+function SignUp() {
 
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const [email, setEmail] = useState("");
+  // Check if the password includes at least one number
 
-  const [password, setPassword] = useState("");
+  function containsNumber(password) {
+    for (let i = 0; i < password.length; i++) {
+      if (!isNaN(password[i]) && password[i] !== ' ') {
+        return true;
+      }
+      
+    }
+    return false;
 
-  function handleSubmit(e) {
+   }
 
+
+  // Handle form submission
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Signing up with:", name, email, password);
-    // Future: send this data to a backend ?s
-  }
+
+    // Check that both fields are filled
+
+    if (!username || !password) {
+      setMessage('Please fill in all fields.');
+      return;
+
+    }
+
+    // Check that password is strong enough
+
+    if (password.length < 6 || !containsNumber(password)) {
+      setMessage('Password must be at least 6 characters and include a number.');
+      return;
+    }
+
+    // If everything is valid
+
+    setMessage('Creating account, standby...');
+
+    // This is where you would normally send data to your server
+
+  };
 
   return (
 
-    <section id="signup">
-
-      <h2>Sign Up</h2>
+    <div className="form-container">
+      <h2>Create an Account</h2>
 
       <form onSubmit={handleSubmit}>
         <label>
-
-          Name:<br/>
+          Username:
           <input 
             type="text" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
-
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
           />
-          
+
+
         </label>
 
         <br/>
 
         <label>
-          Email:<br/>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-
-          />
-        </label>
-
-        <br/>
-
-
-        <label>
-          Password:<br/>
+          Password:
           <input 
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
+
           />
 
         </label>
 
-        <br/><br/>
+        <br />
 
-        <button type="submit">Create Account</button>
+        <Button type="submit">Create Account</Button>
       </form>
 
-        </section>
+      {message && <p>{message}</p>}
 
+    </div>
   );
-
 
 }
 
-export default Signup;
+export default SignUp;
+

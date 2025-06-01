@@ -8,11 +8,13 @@ function Resources() {
 
     <section id="resources">
 
+
       <h2>Helpful Resources for Shoots and Planning</h2>
 
       <p>Need a hand planning your shoot? We've got you covered!:</p>
       
 
+      {/* List of clickable links to external planning tools */}
       <ul>
 
         <li>

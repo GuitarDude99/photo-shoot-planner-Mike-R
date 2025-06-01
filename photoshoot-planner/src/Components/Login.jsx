@@ -2,64 +2,82 @@
 
 import React, { useState } from "react";
 
+import Button from "./Button";
+
 function Login() {
 
-  const [email, setEmail] = useState("");
+  // State to manage form fields
+
+  const [username, setUsername] = useState("") ;
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e) {
+  // State to manage feedback message
 
+  const [message, setMessage] = useState("");
+
+  // This function is triggered when the form is submitted
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Logging in with:", email, password);
-  
-  }
 
+    // check if both fields are filled
 
+    if (!username || !password) {
+
+      setMessage("Please enter both username and password.");
+      return;
+
+    }
+
+    // Display loading message after validation passes
+
+    setMessage("Logging in, one moment...");
+  };
 
   return (
-    
-    <section id="login">
 
+    <div className="login-form">
       <h2>Log In</h2>
 
-      <form onSubmit={handleSubmit}>
+      {/* Form to collect login info */}
 
-        <label>
-          Email:<br/>
+      <form onSubmit={handleLogin}>
+        
+        {/* Username input */}
 
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           />
 
-        </label>
+        {/* Password input */}
 
-        <br/>
+        <label htmlFor="password">Password:</label>
 
-        <label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
 
-          Password:<br/>
+        />
 
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-          />
+        {/* Submit button that uses reusable component */}
 
-        </label>
-        <br /><br />
-
-        <button type="submit">Log In</button>
+        <Button type="submit">Log In</Button>
 
       </form>
 
-    </section>
+      {/* Feedback message displayed to the user */}
+      {message && <p>{message}</p>}
+
+    </div>
 
   );
-
+  
 }
-
 
 export default Login;

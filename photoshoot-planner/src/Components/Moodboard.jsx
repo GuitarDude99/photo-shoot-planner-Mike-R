@@ -1,102 +1,123 @@
 //Moodboard
 
 import React, { useState, useRef } from "react";
+import Button from "./Button";
 
 function Moodboard() {
 
-  const [imagePreview, setImagePreview] = useState("/samplejac.jpg");
+  // Start with 3 default example images from the public folder
 
+  const [imagePreviews, setImagePreviews] = useState([
+    "/example1.jpg",
+    "/example2.jpg",
+    "/example3.jpg",
+  ]);
 
-   const [updateMessage, setUpdateMessage] = useState("");
+  const [updateMessage, setUpdateMessage] = useState("");
+  const fileInputRef = useRef(null); // for hidden file input
 
-  const fileInputRef = useRef(null); //  Ref for hidden file input
+  // When the Add button is clicked, simulate a click on the hidden file input
 
   const handleAddClick = () => {
-    fileInputRef.current.click(); // Trigger the file picker 
+    fileInputRef.current.click();
+    
   };
+
+  // When a user selects an image to upload
 
   const handleImageChange = (event) => {
 
-    const file = event.target.files[0];
-
-    if (file) {
+    const selectedFiles = Array.from(event.target.files).slice(0, 3);
+    const newPreviews = [];
+    let loadedCount = 0;
+  
+    selectedFiles.forEach((file) => {
       const reader = new FileReader();
+  
+      reader.onload = () => {
+        newPreviews.push(reader.result);
+        loadedCount++;
+  
+        // When all files are loaded, update the state
 
-      reader.onloadend = () => {
-
-        setImagePreview(reader.result);
-        setUpdateMessage("Added!");
-        setTimeout(() => setUpdateMessage(""), 3000);
-
+        if (loadedCount === selectedFiles.length) {
+          setImagePreviews((prev) => [...prev, ...newPreviews]);
+          setUpdateMessage("Images added!");
+          setTimeout(() => setUpdateMessage(""), 3000);
+        }
       };
+  
+      reader.readAsDataURL(file);
 
-        reader.readAsDataURL(file);
-    }
+    });
+  
+    // Reset file input so same file can be re-selected later
 
+    event.target.value = null;
+  };
+  
+
+  // Remove an image by its index
+
+  const handleRemove = (indexToRemove) => {
+    const updatedImages = imagePreviews.filter((_, index) => index !== indexToRemove);
+    setImagePreviews(updatedImages);
   };
 
   return (
-
-    <div style={{ padding: "2rem", color: "white" }}>
-
-      <h2>Moodboard / Inspiration</h2>
-
+    <div style={{ padding: "2rem", color: "white", textAlign: "center" }}>
+      <h2>Moodboard</h2>
       <p>Use this space to collect visual ideas for your shoot.</p>
 
-      <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">
+{/*External Resources*/} 
+      <a
+        href="https://www.pinterest.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Visit Pinterest
       </a>
-
-      <br/>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <br />
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Browse Instagram
       </a>
 
-      <h3 style={{ marginTop: "2rem" }}>Uploaded Inspiration:</h3>
+      <h3 style={{ marginTop: "2rem" }}>Uploaded Inspirations:</h3>
 
-      <div>
-        <p>Example Image</p>
-        <p>Model: Jacyln Tripp</p>
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          ref={fileInputRef}
-          style={{ display: "none" }}
-        />
-
-        
-        <button type="button" onClick={handleAddClick}>
-          Add
-        </button>
-
-       
-        {updateMessage && (
-
-          <p style={{ fontWeight: "bold", marginTop: "1rem" }}>
-            {updateMessage}
-          </p>
-        )}
-
-      
-        {imagePreview && (
-          
-          <div style={{ marginTop: "1rem" }}>
-            <img
-              src={imagePreview}
-              alt="Preview"
-              style={{ maxWidth: "300px", border: "1px solid #ccc" }}
-            />
-
+      <div className="moodboard-grid">
+        {imagePreviews.map((src, index) => (
+          <div key={index} className="image-wrapper">
+            <img src={src} alt={`Moodboard ${index + 1}`} />
+            <Button onClick={() => handleRemove(index)}>Remove</Button>
           </div>
-        )}
-
+        ))}
       </div>
 
+      {/* Hidden file input */}
+
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={handleImageChange}
+        ref={fileInputRef}
+        style={{ display: "none" }}
+      />
+
+      {/* Add Button */}
+
+      <Button onClick={handleAddClick}>Add</Button>
+
+      {/* Upload message */}
+      {updateMessage && (
+        <p style={{ fontWeight: "bold", marginTop: "1rem" }}>{updateMessage}</p>
+      )}
     </div>
   );
-
 }
 
 export default Moodboard;
