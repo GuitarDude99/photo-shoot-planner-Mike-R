@@ -12,6 +12,7 @@ import Home from "./Components/Home";
 import Planner from "./Components/Planner";
 import Moodboard from "./Components/Moodboard";
 import Resources from "./Components/Resources";
+import Footer from "./Components/Footer";
 
 // Import React and React Router tools for navigation
 
@@ -57,6 +58,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom" 
           </Routes>
 
    </main>
+
+   <Footer/>
 
       </div>
 
